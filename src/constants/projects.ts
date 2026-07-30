@@ -495,4 +495,256 @@ export const PROJECTS: Project[] = [
       { value: "Android 8+", label: "Device compatibility" },
     ],
   },
+  {
+    id: "novastore",
+    slug: "novastore",
+    name: "NovaStore",
+    category: "E-Commerce",
+    tagline: "Premium E-commerce, Reimagined.",
+    description:
+      "NovaStore is a modern, high-end e-commerce mobile application built entirely in Flutter. It provides users with a frictionless and aesthetically pleasing shopping experience, from discovering trending products to managing their cart and completing checkout. Designed with a strict focus on premium UI/UX, the app features immersive image transitions, custom interactive components, and skeleton loading states to ensure a polished, luxury feel on every screen.",
+    accent: "#6366f1",
+    color: "from-indigo-600/20 to-indigo-900/20",
+    tech: ["Flutter", "Dart", "Material 3", "cached_network_image", "shimmer"],
+    github: "",
+    demo: "",
+    isPlayStore: false,
+
+    features: [
+      "Immersive Product Discovery with staggered grids and carousels",
+      "Seamless Hero Transitions with 60fps animations",
+      "Interactive Cart & Checkout with swipe-to-delete",
+      "Graceful Loading States via custom Shimmer skeletons",
+    ],
+
+    detailFeatures: [
+      {
+        icon: "✨",
+        title: "Immersive Product Discovery",
+        description:
+          "Beautiful staggered grid layouts and horizontal scrolling carousels allow for intuitive and visually engaging browsing.",
+      },
+      {
+        icon: "🚀",
+        title: "Seamless Hero Transitions",
+        description:
+          "Fluid, 60fps animations that seamlessly expand product images from the feed directly into the full-screen details view.",
+      },
+      {
+        icon: "🛒",
+        title: "Interactive Cart & Checkout",
+        description:
+          "A fully interactive UI for adjusting item quantities, gesture-based swipe-to-delete interactions, and a clean payment selection flow.",
+      },
+      {
+        icon: "⏳",
+        title: "Graceful Loading States",
+        description:
+          "Custom Shimmer skeleton screens that provide visual feedback during simulated data fetching, preventing jarring empty screens.",
+      },
+    ],
+
+    floatingCards: [
+      { icon: "👗", label: "Premium Fashion" },
+      { icon: "✨", label: "60fps Animations" },
+      { icon: "🛒", label: "Interactive Cart" },
+      { icon: "🖼️", label: "Hero Transitions" },
+      { icon: "⏳", label: "Shimmer Loading" },
+    ],
+
+    images: {
+      cover: "cover.webp",
+      thumbnail: "thumbnail.webp",
+      hero: "hero.webp",
+      screens: [
+        {
+          title: "Home Feed",
+          description: "Staggered grids, categories, custom bottom nav",
+          image: "home.webp",
+        },
+        {
+          title: "Product Details",
+          description: "Immersive image carousel, size/color selectors, sticky buy bar",
+          image: "details.webp",
+        },
+        {
+          title: "Search & Categories",
+          description: "Trending items, Shimmer loading skeletons",
+          image: "search.webp",
+        },
+        {
+          title: "Shopping Cart",
+          description: "Quantity controls, swipe-to-delete gestures",
+          image: "cart.webp",
+        },
+        {
+          title: "Checkout & Success",
+          description: "Order summary, payment methods",
+          image: "checkout.webp",
+        },
+        {
+          title: "User Profile",
+          description: "Premium user dashboard and Wishlist grid",
+          image: "profile.webp",
+        },
+      ],
+      gallery: ["01.webp", "02.webp", "03.webp", "04.webp"],
+    },
+
+    architecture: [
+      { label: "Flutter", sublabel: "UI Framework", group: "Frontend" },
+      { label: "cached_network_image", sublabel: "Image Optimization", group: "Performance" },
+      { label: "shimmer", sublabel: "Loading States", group: "UX" },
+    ],
+
+    challenges: [
+      {
+        title: "Complex Hero Animations & Performance",
+        description:
+          "Implementing context-aware Hero animations across multiple navigation stacks without causing tag collisions, while maintaining a smooth 60fps frame rate during high-resolution image rendering.",
+        decision:
+          "Implemented dynamic, unique Hero tags passed through routes. Replaced static assets with cached_network_image to asynchronously fetch, cache, and decode high-res imagery off the main UI thread.",
+        result:
+          "Achieved butter-smooth UI transitions with zero frame drops, significantly reduced initial memory load, and prevented layout jank and crash errors.",
+      },
+    ],
+
+    lessons: [
+      "Optimizing heavy image assets is critical for maintaining 60fps on mobile devices.",
+      "Custom Hero tags require careful management across navigation stacks.",
+      "Skeleton screens drastically improve perceived performance and user experience.",
+    ],
+
+    results: [
+      { value: "60fps", label: "Fluid UI Transitions" },
+      { value: "0", label: "Frame Drops" },
+      { value: "100%", label: "Premium Feel" },
+    ],
+  },
+  {
+    id: "foodie",
+    slug: "foodie",
+    name: "Foodie",
+    category: "Food Delivery",
+    tagline: "Hot, authentic meals at your doorstep in minutes.",
+    description:
+      "Foodie is a high-fidelity, interactive food delivery mobile application designed to provide a premium, seamless ordering experience. Built with a localized Indian context in mind, the app allows hungry users to discover local restaurants, heavily customize their orders with add-ons, manage a real-time shopping cart, and track their delivery. It solves the problem of clunky food ordering by prioritizing a buttery-smooth, visually stunning user experience.",
+    accent: "#f97316",
+    color: "from-orange-500/20 to-orange-900/20",
+    tech: ["Flutter", "Dart", "Provider", "Google Fonts", "Pollinations AI"],
+    github: "",
+    demo: "",
+    isPlayStore: false,
+
+    features: [
+      "Seamless Hero Animations bridging home feed to details",
+      "Dynamic Cart & State Management powered by Provider",
+      "Customizable Food Orders with add-ons",
+      "Order Tracking Simulation with static map layout",
+    ],
+
+    detailFeatures: [
+      {
+        icon: "🚀",
+        title: "Seamless Hero Animations",
+        description:
+          "Buttery-smooth zoom transitions (Hero widgets) that bridge the home feed directly into restaurant and food details, maintaining visual context for the user.",
+      },
+      {
+        icon: "🛒",
+        title: "Dynamic Cart & State Management",
+        description:
+          "A fully functional, reactive shopping cart powered by Provider that instantly calculates item totals, delivery fees, and taxes across the app.",
+      },
+      {
+        icon: "🍔",
+        title: "Customizable Food Orders",
+        description:
+          "A rich food details screen that allows users to seamlessly increment quantities and select price-modifying add-ons (e.g., Extra Raita, Gulab Jamun) before adding to the cart.",
+      },
+      {
+        icon: "📍",
+        title: "Order Tracking Simulation",
+        description:
+          "A highly polished post-checkout experience featuring a beautifully mocked static map layout and a dedicated driver profile view.",
+      },
+    ],
+
+    floatingCards: [
+      { icon: "🍕", label: "Food Delivery" },
+      { icon: "🛒", label: "Reactive Cart" },
+      { icon: "📍", label: "Order Tracking" },
+      { icon: "⚡", label: "60fps Animations" },
+      { icon: "🧠", label: "Provider State" },
+    ],
+
+    images: {
+      cover: "cover.webp",
+      thumbnail: "thumbnail.webp",
+      hero: "hero.webp",
+      screens: [
+        {
+          title: "Splash & Onboarding",
+          description: "Animated logo leading into a product tour.",
+          image: "onboarding.webp",
+        },
+        {
+          title: "Login",
+          description: "Sleek authentication gateway.",
+          image: "login.webp",
+        },
+        {
+          title: "Home Feed",
+          description: "Categories, promo banner, horizontal scrolling lists.",
+          image: "home.webp",
+        },
+        {
+          title: "Food Details",
+          description: "Sticky-header sliver screens for customizing items.",
+          image: "details.webp",
+        },
+        {
+          title: "Cart & Checkout",
+          description: "Order summary, dynamic pricing, address selection.",
+          image: "cart.webp",
+        },
+        {
+          title: "Order Tracking",
+          description: "Live-style map view showing delivery status.",
+          image: "tracking.webp",
+        },
+      ],
+      gallery: ["01.webp", "02.webp", "03.webp", "04.webp"],
+    },
+
+    architecture: [
+      { label: "Flutter", sublabel: "UI Framework", group: "Frontend" },
+      { label: "Provider", sublabel: "State Management", group: "State" },
+      { label: "Generative AI", sublabel: "Pollinations", group: "Assets" },
+    ],
+
+    challenges: [
+      {
+        title: "Reactive State & Layout Overflow",
+        description:
+          "Managing reactive state across heavily nested UI components (cart badges, add-on selectors) while avoiding tightly coupled code and UI layout overflow crashes (RenderFlex errors).",
+        decision:
+          "Implemented ChangeNotifier/Provider pattern to decouple cart logic from UI layer. Refactored strict-width rows to utilize Expanded wrappers and TextOverflow.ellipsis for flexible adaptation.",
+        result:
+          "Achieved a fluid, crash-free 60FPS UI. Cart state propagates instantly and predictably across all active tabs without expensive global rebuilds, scaling beautifully across devices.",
+      },
+    ],
+
+    lessons: [
+      "Decoupling business logic from UI using Provider is essential for scalable Flutter apps.",
+      "Properly handling flexible layouts prevents common RenderFlex overflows on varied screen sizes.",
+      "Hero animations greatly enhance the perceived quality and flow of the application.",
+    ],
+
+    results: [
+      { value: "60fps", label: "Fluid UI" },
+      { value: "Instant", label: "State Updates" },
+      { value: "0", label: "RenderFlex Errors" },
+    ],
+  },
 ];
