@@ -498,6 +498,7 @@ export const PROJECTS: Project[] = [
   {
     id: "novastore",
     slug: "novastore",
+    featured: true,
     name: "NovaStore",
     category: "E-Commerce",
     tagline: "Premium E-commerce, Reimagined.",
@@ -624,6 +625,7 @@ export const PROJECTS: Project[] = [
   {
     id: "foodie",
     slug: "foodie",
+    featured: true,
     name: "Foodie",
     category: "Food Delivery",
     tagline: "Hot, authentic meals at your doorstep in minutes.",
