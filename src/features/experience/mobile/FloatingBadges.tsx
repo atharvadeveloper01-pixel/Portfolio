@@ -24,7 +24,7 @@ interface FloatingBadgesProps {
 
 export default function FloatingBadges({ cards, accent }: FloatingBadgesProps) {
   return (
-    <div className="absolute inset-0 pointer-events-none hidden lg:block">
+    <div className="absolute inset-0 pointer-events-none hidden lg:block z-20">
       {cards.slice(0, POSITIONS.length).map((card, i) => {
         const pos = POSITIONS[i];
         return (

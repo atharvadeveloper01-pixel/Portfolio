@@ -3,19 +3,20 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { AppScreen } from "@/types";
-import AppScreenRenderer from "./AppScreen";
+import type { ProjectScreen } from "@/types";
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 interface InteractivePhoneProps {
-  screens: AppScreen[];
+  screens: ProjectScreen[];
   accent: string;
+  slug: string;
 }
 
 const SLIDE_DURATION = 0.3;
 const SLIDE_EASE: [number, number, number, number] = [0.32, 0, 0.67, 0];
 
-export default function InteractivePhone({ screens, accent }: InteractivePhoneProps) {
+export default function InteractivePhone({ screens, accent, slug }: InteractivePhoneProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
 
@@ -53,7 +54,7 @@ export default function InteractivePhone({ screens, accent }: InteractivePhonePr
       {/* Screen label */}
       <div className="flex items-center gap-2 h-7">
         <span className="text-xs font-medium text-zinc-500">
-          {screens[activeIndex]?.label}
+          {screens[activeIndex]?.title}
         </span>
         <span className="text-xs text-zinc-700">
           {activeIndex + 1} / {screens.length}
@@ -98,9 +99,13 @@ export default function InteractivePhone({ screens, accent }: InteractivePhonePr
                   else if (info.offset.x > 50) handlePrev();
                 }}
               >
-                <AppScreenRenderer
-                  screen={screens[activeIndex]}
-                  accent={accent}
+                <Image 
+                  src={`/projects/${slug}/screens/${screens[activeIndex].image}`}
+                  alt={screens[activeIndex].title}
+                  fill
+                  className="object-cover"
+                  sizes="260px"
+                  priority
                 />
               </motion.div>
             </AnimatePresence>

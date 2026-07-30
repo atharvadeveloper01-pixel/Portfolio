@@ -3,17 +3,33 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import type { AppScreen } from "@/types";
-import AppScreenRenderer from "./AppScreen";
+import type { ProjectScreen } from "@/types";
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 
 interface ScreenGalleryProps {
-  screens: AppScreen[];
+  gallery?: string[];
+  screens: ProjectScreen[];
   accent: string;
+  slug: string;
 }
 
-export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
+export default function ScreenGallery({ gallery, screens, accent, slug }: ScreenGalleryProps) {
   const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
+
+  const items = gallery && gallery.length > 0
+    ? gallery.map((img, i) => ({
+        id: `gallery-${i}`,
+        path: `/projects/${slug}/gallery/${img}`,
+        label: `Gallery Image ${i + 1}`,
+        description: undefined,
+      }))
+    : screens.map((s, i) => ({
+        id: `screen-${i}`,
+        path: `/projects/${slug}/screens/${s.image}`,
+        label: s.title,
+        description: s.description,
+      }));
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Keyboard navigation in fullscreen
@@ -21,13 +37,13 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
     if (fullscreenIndex === null) return;
     function handleKey(e: KeyboardEvent) {
       if (fullscreenIndex === null) return;
-      if (e.key === "ArrowRight") setFullscreenIndex((i) => Math.min(screens.length - 1, (i ?? 0) + 1));
+      if (e.key === "ArrowRight") setFullscreenIndex((i) => Math.min(items.length - 1, (i ?? 0) + 1));
       if (e.key === "ArrowLeft") setFullscreenIndex((i) => Math.max(0, (i ?? 0) - 1));
       if (e.key === "Escape") setFullscreenIndex(null);
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [fullscreenIndex, screens.length]);
+  }, [fullscreenIndex, items.length]);
 
   // Lock body scroll when fullscreen is open
   useEffect(() => {
@@ -57,9 +73,9 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
         className="flex gap-6 overflow-x-auto pb-10 pt-2 px-6 lg:px-12 scrollbar-none snap-x snap-mandatory"
         style={{ scrollPaddingLeft: "48px" }}
       >
-        {screens.map((screen, i) => (
+        {items.map((item, i) => (
           <motion.div
-            key={screen.id}
+            key={item.id}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -75,7 +91,13 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
               {/* Notch */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10 h-4 w-14 rounded-b-xl bg-zinc-900 border-b border-x border-zinc-800" />
               <div className="absolute inset-0">
-                <AppScreenRenderer screen={screen} accent={accent} />
+                <Image 
+                  src={item.path}
+                  alt={item.label}
+                  fill
+                  className="object-cover"
+                  sizes="168px"
+                />
               </div>
               {/* Hover overlay */}
               <div
@@ -93,7 +115,7 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
 
             {/* Label */}
             <p className="text-xs font-medium text-zinc-500 group-hover:text-zinc-300 transition-colors">
-              {screen.label}
+              {item.label}
             </p>
           </motion.div>
         ))}
@@ -121,7 +143,7 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
 
             {/* Prev */}
             <button
-              className="absolute left-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:-translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
+              className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:-translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
               onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.max(0, (i ?? 0) - 1)); }}
               disabled={fullscreenIndex === 0}
               aria-label="Previous screen"
@@ -131,9 +153,9 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
 
             {/* Next */}
             <button
-              className="absolute right-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
-              onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.min(screens.length - 1, (i ?? 0) + 1)); }}
-              disabled={fullscreenIndex === screens.length - 1}
+              className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
+              onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.min(items.length - 1, (i ?? 0) + 1)); }}
+              disabled={fullscreenIndex === items.length - 1}
               aria-label="Next screen"
             >
               <ChevronRight className="h-4 w-4" />
@@ -156,7 +178,7 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
                 />
 
                 <div
-                  className="relative z-10 w-[300px] h-[624px] rounded-[3rem] border-2 border-zinc-700 bg-zinc-900 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)]"
+                  className="relative z-10 h-[65vh] min-h-[400px] max-h-[624px] aspect-[300/624] rounded-[2.5rem] sm:rounded-[3rem] border-2 border-zinc-700 bg-zinc-900 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] shrink-0"
                   style={{ borderColor: `${accent}40` }}
                 >
                   {/* Notch */}
@@ -164,25 +186,31 @@ export default function ScreenGallery({ screens, accent }: ScreenGalleryProps) {
                     <div className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
                     <div className="h-1 w-7 rounded-full bg-zinc-800" />
                   </div>
-                  <AppScreenRenderer screen={screens[fullscreenIndex]} accent={accent} />
+                  <Image 
+                    src={items[fullscreenIndex].path}
+                    alt={items[fullscreenIndex].label}
+                    fill
+                    className="object-cover"
+                    sizes="(max-height: 800px) 250px, 300px"
+                  />
                   <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 h-1 w-24 rounded-full bg-zinc-700" />
                 </div>
 
                 {/* Screen label + description */}
                 <div className="text-center max-w-xs">
                   <p className="font-semibold text-zinc-100 mb-1">
-                    {screens[fullscreenIndex].label}
+                    {items[fullscreenIndex].label}
                   </p>
-                  {screens[fullscreenIndex].description && (
+                  {items[fullscreenIndex].description && (
                     <p className="text-xs text-zinc-500 leading-relaxed">
-                      {screens[fullscreenIndex].description}
+                      {items[fullscreenIndex].description}
                     </p>
                   )}
                 </div>
 
                 {/* Dot indicators */}
                 <div className="flex items-center gap-2">
-                  {screens.map((_, i) => (
+                  {items.map((_, i) => (
                     <button
                       key={i}
                       onClick={(e) => { e.stopPropagation(); setFullscreenIndex(i); }}

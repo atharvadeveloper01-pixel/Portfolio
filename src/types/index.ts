@@ -30,49 +30,16 @@ export interface Skill {
 /** Which experience template to render */
 export type ProjectType = "mobile" | "web" | "dashboard";
 
-/** Abstract app screen types rendered inside the interactive phone */
-export type AppScreenType =
-  | "auth"
-  | "dashboard"
-  | "list"
-  | "form"
-  | "profile"
-  | "gallery"
-  | "detail"
-  | "game"
-  | "result";
-
-export interface AppScreenItem {
-  label: string;
-  secondary?: string;
-  done?: boolean;
-  color?: string;
-}
-
-export interface AppScreenStat {
-  label: string;
-  value: string;
+export interface ProjectScreen {
+  title: string;
+  description?: string;
+  image: string;
 }
 
 /** A floating badge shown around the hero phone */
 export interface FloatingCard {
   label: string;
   icon: string; // emoji or short text
-}
-
-/** A single screen in the interactive phone simulator */
-export interface AppScreen {
-  id: string;
-  /** Shown in dot-indicator and screen header */
-  label: string;
-  /** Why this screen exists — shown in App Journey section */
-  description?: string;
-  type: AppScreenType;
-  header?: string;
-  subtitle?: string;
-  items?: AppScreenItem[];
-  stats?: AppScreenStat[];
-  showFAB?: boolean;
 }
 
 /** One node in the visual architecture flow diagram */
@@ -139,7 +106,13 @@ export interface Project {
 
   // Experience framework
   type: ProjectType;
-  screens: AppScreen[];
+  images: {
+    cover: string;
+    thumbnail: string;
+    hero: string;
+    screens: ProjectScreen[];
+    gallery?: string[];
+  };
   floatingCards: FloatingCard[]; // shown floating around hero phone
   architecture: ArchitectureNode[];
   challenges: ProjectChallenge[];

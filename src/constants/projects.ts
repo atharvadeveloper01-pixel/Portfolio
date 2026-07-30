@@ -88,76 +88,49 @@ export const PROJECTS: Project[] = [
       { icon: "🏗️", label: "Clean Architecture" },
     ],
 
-    // Interactive phone screens with journey descriptions
-    screens: [
-      {
-        id: "login",
-        label: "Login",
-        description:
-          "The first impression. Clean authentication using Firebase Auth — users can sign in with email/password or Google. Sessions persist securely so users never log in twice.",
-        type: "auth",
-        header: "Welcome back",
-        subtitle: "Sign in to TaskFlow",
-      },
-      {
-        id: "home",
-        label: "Dashboard",
-        description:
-          "The productivity command centre. Users immediately see today's task count, completion stats, and the three most urgent tasks — everything actionable without scrolling.",
-        type: "dashboard",
-        header: "Good morning ✨",
-        subtitle: "You have 5 tasks today",
-        stats: [
-          { label: "Done", value: "12" },
-          { label: "Active", value: "5" },
-          { label: "Overdue", value: "2" },
-        ],
-        items: [
-          { label: "Design landing page", secondary: "High · Work", done: true },
-          { label: "Fix auth bug", secondary: "High · Dev", done: false },
-          { label: "API integration", secondary: "Med · Dev", done: false },
-        ],
-      },
-      {
-        id: "tasks",
-        label: "All Tasks",
-        description:
-          "The full task list — colour-coded priorities, completion checkboxes, and a FAB for instant task creation. Real-time Firestore listeners mean this list updates the moment a task changes on any device.",
-        type: "list",
-        header: "My Tasks",
-        items: [
-          { label: "Design landing page", secondary: "High Priority", done: true },
-          { label: "Fix login bug", secondary: "High Priority", done: false },
-          { label: "API integration", secondary: "Medium", done: false },
-          { label: "Write unit tests", secondary: "Low Priority", done: false },
-          { label: "Update README", secondary: "Low Priority", done: true },
-        ],
-        showFAB: true,
-      },
-      {
-        id: "add",
-        label: "New Task",
-        description:
-          "Frictionless task creation. Title, category, priority, and due date — four fields and you're done. The form validates inline and writes to Firestore optimistically for instant feedback.",
-        type: "form",
-        header: "New Task",
-        subtitle: "Add details below",
-      },
-      {
-        id: "profile",
-        label: "Profile",
-        description:
-          "Personalised productivity snapshot. Task completion rate, current streak, and category distribution give users insight into their working patterns over time.",
-        type: "profile",
-        header: "Atharva J.",
-        subtitle: "Productivity Score: 84%",
-        stats: [
-          { label: "Tasks Done", value: "47" },
-          { label: "Streak", value: "12d" },
-          { label: "Categories", value: "6" },
-        ],
-      },
-    ],
+    images: {
+      cover: "cover.webp",
+      thumbnail: "thumbnail.webp",
+      hero: "hero.webp",
+      screens: [
+        {
+          title: "Login",
+          description:
+            "The first impression. Clean authentication using Firebase Auth — users can sign in with email/password or Google. Sessions persist securely so users never log in twice.",
+          image: "login.webp",
+        },
+        {
+          title: "Dashboard",
+          description:
+            "The productivity command centre. Users immediately see today's task count, completion stats, and the three most urgent tasks — everything actionable without scrolling.",
+          image: "dashboard.webp",
+        },
+        {
+          title: "All Tasks",
+          description:
+            "The full task list — colour-coded priorities, completion checkboxes, and a FAB for instant task creation. Real-time Firestore listeners mean this list updates the moment a task changes on any device.",
+          image: "tasks.webp",
+        },
+        {
+          title: "New Task",
+          description:
+            "Frictionless task creation. Title, category, priority, and due date — four fields and you're done. The form validates inline and writes to Firestore optimistically for instant feedback.",
+          image: "add.webp",
+        },
+        {
+          title: "Profile",
+          description:
+            "Personalised productivity snapshot. Task completion rate, current streak, and category distribution give users insight into their working patterns over time.",
+          image: "profile.webp",
+        },
+      ],
+      gallery: [
+        "01.webp",
+        "02.webp",
+        "03.webp",
+        "04.webp",
+      ],
+    },
 
     architecture: [
       { label: "Flutter", sublabel: "UI Framework", group: "Frontend" },
@@ -289,56 +262,37 @@ export const PROJECTS: Project[] = [
       { icon: "📱", label: "No Login Required" },
     ],
 
-    screens: [
-      {
-        id: "discover",
-        label: "Discover",
-        description:
-          "The home feed. Curated category tiles — Nature, Architecture, Abstract, Travel — let users browse by mood rather than keywords. No decision fatigue on first open.",
-        type: "dashboard",
-        header: "Discover",
-        subtitle: "Find your next wallpaper",
-        items: [
-          { label: "Nature", secondary: "1.2k photos", color: "#16a34a" },
-          { label: "Architecture", secondary: "890 photos", color: "#7C3AED" },
-          { label: "Abstract", secondary: "2.1k photos", color: "#db2777" },
-          { label: "Travel", secondary: "3.4k photos", color: "#ea580c" },
-        ],
-      },
-      {
-        id: "browse",
-        label: "Browse",
-        description:
-          "The masonry grid — lazy-loaded thumbnails from Pexels API, adapting from 2 to 3 columns based on screen width. CachedNetworkImage ensures scrolling stays smooth at 60fps.",
-        type: "gallery",
-        header: "Trending",
-        subtitle: "Updated daily from Pexels",
-      },
-      {
-        id: "preview",
-        label: "Preview",
-        description:
-          "Full-screen immersive preview. The wallpaper fills the entire display before the user commits to saving or setting it. A single tap dismisses — no friction.",
-        type: "detail",
-        header: "Mountain Sunrise",
-        subtitle: "By @alex_photo · 4K",
-      },
-      {
-        id: "favorites",
-        label: "Favorites",
-        description:
-          "Saved wallpapers persist locally via SharedPreferences — completely offline, no account required. The list loads instantly because it never touches the network.",
-        type: "list",
-        header: "My Favorites",
-        subtitle: "8 wallpapers saved",
-        items: [
-          { label: "Mountain Sunrise", secondary: "Nature · 4K", done: false },
-          { label: "City at Night", secondary: "Architecture · HD", done: false },
-          { label: "Abstract Flow", secondary: "Abstract · 4K", done: false },
-          { label: "Forest Path", secondary: "Nature · 4K", done: false },
-        ],
-      },
-    ],
+    images: {
+      cover: "cover.webp",
+      thumbnail: "thumbnail.webp",
+      hero: "hero.webp",
+      screens: [
+        {
+          title: "Discover",
+          description:
+            "The home feed. Curated category tiles — Nature, Architecture, Abstract, Travel — let users browse by mood rather than keywords. No decision fatigue on first open.",
+          image: "home_screen.webp",
+        },
+        {
+          title: "Browse",
+          description:
+            "The masonry grid — lazy-loaded thumbnails from Pexels API, adapting from 2 to 3 columns based on screen width. CachedNetworkImage ensures scrolling stays smooth at 60fps.",
+          image: "home_screen1.webp",
+        },
+        {
+          title: "Preview",
+          description:
+            "Full-screen immersive preview. The wallpaper fills the entire display before the user commits to saving or setting it. A single tap dismisses — no friction.",
+          image: "set_wallpaper_screen.webp",
+        },
+        {
+          title: "Favorites",
+          description:
+            "Saved wallpapers persist locally via SharedPreferences — completely offline, no account required. The list loads instantly because it never touches the network.",
+          image: "favorite_screen.webp",
+        },
+      ],
+    },
 
     architecture: [
       { label: "Flutter", sublabel: "UI Framework", group: "Frontend" },
@@ -469,50 +423,37 @@ export const PROJECTS: Project[] = [
       { icon: "✅", label: "1st Try Approval" },
     ],
 
-    screens: [
-      {
-        id: "menu",
-        label: "Main Menu",
-        description:
-          "The first screen every player sees. High score is prominently displayed to motivate replay. The Play button is large and immediate — zero friction to starting a game.",
-        type: "dashboard",
-        header: "Mood Mesh",
-        subtitle: "Test your reflexes",
-        stats: [
-          { label: "Best Score", value: "2,840" },
-          { label: "Games", value: "47" },
-          { label: "Rank", value: "#1" },
-        ],
-      },
-      {
-        id: "game",
-        label: "Gameplay",
-        description:
-          "The core loop — a 3×3 grid of interactive tiles. GestureDetector handles all touch input. The render loop is carefully optimised to maintain 60fps even as difficulty scales.",
-        type: "game",
-        header: "1,240",
-        subtitle: "Score",
-        stats: [
-          { label: "Level", value: "4" },
-          { label: "Lives", value: "3" },
-          { label: "Combo", value: "x2" },
-        ],
-      },
-      {
-        id: "result",
-        label: "Result",
-        description:
-          "Post-game result screen. New high scores are celebrated with a confetti animation. Score improvement percentage gives players a sense of progression. One-tap replay keeps the loop tight.",
-        type: "result",
-        header: "2,840",
-        subtitle: "New High Score! 🎉",
-        stats: [
-          { label: "Previous Best", value: "2,110" },
-          { label: "Improvement", value: "+34%" },
-          { label: "Rank", value: "#1" },
-        ],
-      },
-    ],
+    images: {
+      cover: "cover.webp",
+      thumbnail: "thumbnail.webp",
+      hero: "hero.webp",
+      screens: [
+        {
+          title: "Main Menu",
+          description:
+            "The first screen every player sees. High score is prominently displayed to motivate replay. The Play button is large and immediate — zero friction to starting a game.",
+          image: "menu.webp",
+        },
+        {
+          title: "Gameplay",
+          description:
+            "The core loop — a 3×3 grid of interactive tiles. GestureDetector handles all touch input. The render loop is carefully optimised to maintain 60fps even as difficulty scales.",
+          image: "game.webp",
+        },
+        {
+          title: "Result",
+          description:
+            "Post-game result screen. New high scores are celebrated with a confetti animation. Score improvement percentage gives players a sense of progression. One-tap replay keeps the loop tight.",
+          image: "result.webp",
+        },
+      ],
+      gallery: [
+        "01.webp",
+        "02.webp",
+        "03.webp",
+        "04.webp",
+      ],
+    },
 
     architecture: [
       { label: "Flutter", sublabel: "UI & Game Layer", group: "Frontend" },

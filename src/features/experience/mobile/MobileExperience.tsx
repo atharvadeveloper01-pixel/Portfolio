@@ -30,7 +30,7 @@ export default function MobileExperience({ project }: MobileExperienceProps) {
       <MobileHero project={project} />
 
       {/* 2 — App Journey ⭐ (Curiosity → Interaction) */}
-      <AppJourney screens={project.screens} accent={project.accent} />
+      <AppJourney screens={project.images.screens} accent={project.accent} slug={project.slug} />
 
       {/* 3 — Interactive Phone (Free Exploration) */}
       <section id="interactive" className="w-full py-20 lg:py-28 border-t border-zinc-800/60">
@@ -52,8 +52,8 @@ export default function MobileExperience({ project }: MobileExperienceProps) {
               </div>
 
               <div className="flex flex-col gap-3">
-                {project.screens.map((screen, i) => (
-                  <div key={screen.id} className="flex items-center gap-3">
+                {project.images.screens.map((screen, i) => (
+                  <div key={screen.title} className="flex items-center gap-3">
                     <span
                       className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
                       style={{ backgroundColor: project.accent }}
@@ -61,7 +61,7 @@ export default function MobileExperience({ project }: MobileExperienceProps) {
                       {i + 1}
                     </span>
                     <div>
-                      <p className="text-sm text-zinc-300 font-medium leading-none">{screen.label}</p>
+                      <p className="text-sm text-zinc-300 font-medium leading-none">{screen.title}</p>
                       {screen.description && (
                         <p className="text-xs text-zinc-600 mt-0.5 line-clamp-1">{screen.description}</p>
                       )}
@@ -73,7 +73,7 @@ export default function MobileExperience({ project }: MobileExperienceProps) {
 
             {/* Phone */}
             <div className="flex justify-center order-1 lg:order-2">
-              <InteractivePhone screens={project.screens} accent={project.accent} />
+              <InteractivePhone screens={project.images.screens} accent={project.accent} slug={project.slug} />
             </div>
           </div>
         </Container>
@@ -88,7 +88,7 @@ export default function MobileExperience({ project }: MobileExperienceProps) {
       <KeyFeatures features={project.detailFeatures} accent={project.accent} />
 
       {/* 6 — Screen Gallery (Visual immersion) */}
-      <ScreenGallery screens={project.screens} accent={project.accent} />
+      <ScreenGallery gallery={project.images.gallery} screens={project.images.screens} accent={project.accent} slug={project.slug} />
 
       {/* 7 — Architecture (Technical confidence) */}
       <div id="architecture">

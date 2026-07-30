@@ -2,18 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { AppScreen } from "@/types";
-import AppScreenRenderer from "./AppScreen";
+import type { ProjectScreen } from "@/types";
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 
 interface AppJourneyProps {
-  screens: AppScreen[];
+  screens: ProjectScreen[];
   accent: string;
+  slug: string;
 }
 
 const EASE: [number, number, number, number] = [0.32, 0, 0.67, 0];
 
-export default function AppJourney({ screens, accent }: AppJourneyProps) {
+export default function AppJourney({ screens, accent, slug }: AppJourneyProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
 
@@ -48,10 +49,10 @@ export default function AppJourney({ screens, accent }: AppJourneyProps) {
 
             {screens.map((screen, i) => (
               <button
-                key={screen.id}
+                key={screen.title}
                 onClick={() => navigate(i)}
                 className="relative flex gap-5 py-4 text-left focus:outline-none group"
-                aria-label={`Navigate to ${screen.label} screen`}
+                aria-label={`Navigate to ${screen.title} screen`}
               >
                 {/* Step bubble */}
                 <div
@@ -75,7 +76,7 @@ export default function AppJourney({ screens, accent }: AppJourneyProps) {
                     className="text-sm font-semibold transition-colors duration-300 leading-none"
                     style={{ color: i === activeIndex ? "#fafafa" : "#71717a" }}
                   >
-                    {screen.label}
+                    {screen.title}
                   </p>
 
                   {/* Description — expands when active */}
@@ -140,7 +141,13 @@ export default function AppJourney({ screens, accent }: AppJourneyProps) {
                       }}
                       className="absolute inset-0"
                     >
-                      <AppScreenRenderer screen={screens[activeIndex]} accent={accent} />
+                      <Image 
+                        src={`/projects/${slug}/screens/${screens[activeIndex].image}`}
+                        alt={screens[activeIndex].title}
+                        fill
+                        className="object-cover"
+                        sizes="240px"
+                      />
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -163,7 +170,7 @@ export default function AppJourney({ screens, accent }: AppJourneyProps) {
                   backgroundColor: `${accent}10`,
                 }}
               >
-                {screens[activeIndex]?.label}
+                {screens[activeIndex]?.title}
               </div>
             </div>
           </div>

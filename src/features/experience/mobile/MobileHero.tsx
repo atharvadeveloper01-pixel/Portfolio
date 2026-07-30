@@ -3,7 +3,7 @@ import { ArrowLeft, Play, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import type { Project } from "@/types";
 import Container from "@/components/layout/Container";
-import InteractivePhone from "./InteractivePhone";
+import Image from "next/image";
 import FloatingBadges from "./FloatingBadges";
 
 interface MobileHeroProps {
@@ -11,7 +11,7 @@ interface MobileHeroProps {
 }
 
 export default function MobileHero({ project }: MobileHeroProps) {
-  const { name, tagline, tech, accent, color, github, demo, isPlayStore, screens, floatingCards, results } = project;
+  const { name, tagline, tech, accent, color, github, demo, isPlayStore, floatingCards, results } = project;
 
   return (
     <section id="overview" className="relative w-full min-h-[92vh] flex items-center pt-24 pb-20 overflow-hidden">
@@ -139,8 +139,35 @@ export default function MobileHero({ project }: MobileHeroProps) {
               {/* Floating badges around the phone */}
               <FloatingBadges cards={floatingCards} accent={accent} />
 
-              {/* Interactive phone */}
-              <InteractivePhone screens={screens} accent={accent} />
+              {/* Static hero phone */}
+              <div className="relative z-10 w-[260px] h-[540px] rounded-[2.75rem] border-2 border-zinc-700 bg-zinc-900 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] overflow-hidden" style={{ borderColor: `${accent}30` }}>
+                {/* Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-6 w-24 rounded-b-2xl bg-zinc-900 border-b-2 border-x-2 border-zinc-800 flex items-center justify-center gap-1.5">
+                  <div className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
+                  <div className="h-1 w-6 rounded-full bg-zinc-800" />
+                </div>
+                
+                {/* Hero image */}
+                <div className="absolute inset-0 overflow-hidden rounded-[2.6rem]">
+                  <Image 
+                    src={`/projects/${project.slug}/${project.images.hero}`} 
+                    alt={`${project.name} hero preview`}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="260px"
+                  />
+                </div>
+
+                {/* Home indicator */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 h-1 w-24 rounded-full bg-zinc-700" />
+
+                {/* Side buttons (decorative) */}
+                <div className="absolute right-[-3px] top-20 h-14 w-1 rounded-l bg-zinc-700" />
+                <div className="absolute left-[-3px] top-16 h-8 w-1 rounded-r bg-zinc-700" />
+                <div className="absolute left-[-3px] top-28 h-8 w-1 rounded-r bg-zinc-700" />
+                <div className="absolute left-[-3px] top-40 h-8 w-1 rounded-r bg-zinc-700" />
+              </div>
             </div>
           </div>
         </div>
