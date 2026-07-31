@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { ProjectScreen } from "@/types";
@@ -122,113 +123,116 @@ export default function ScreenGallery({ gallery, screens, accent, slug }: Screen
       </div>
 
       {/* Fullscreen lightbox */}
-      <AnimatePresence>
-        {fullscreenIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 backdrop-blur-2xl"
-            onClick={() => setFullscreenIndex(null)}
-          >
-            {/* Close */}
-            <button
-              className="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-colors z-10"
+      {typeof document !== "undefined" && createPortal(
+        <AnimatePresence>
+          {fullscreenIndex !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl"
               onClick={() => setFullscreenIndex(null)}
-              aria-label="Close fullscreen"
             >
-              <X className="h-4 w-4" />
-            </button>
-
-            {/* Prev */}
-            <button
-              className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:-translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
-              onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.max(0, (i ?? 0) - 1)); }}
-              disabled={fullscreenIndex === 0}
-              aria-label="Previous screen"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-
-            {/* Next */}
-            <button
-              className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
-              onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.min(items.length - 1, (i ?? 0) + 1)); }}
-              disabled={fullscreenIndex === items.length - 1}
-              aria-label="Next screen"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-
-            {/* Large phone */}
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={fullscreenIndex}
-                initial={{ opacity: 0, scale: 0.92, y: 12 }}
-                animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } }}
-                exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.15 } }}
-                onClick={(e) => e.stopPropagation()}
-                className="flex flex-col items-center gap-5"
+              {/* Close */}
+              <button
+                className="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-colors z-10"
+                onClick={() => setFullscreenIndex(null)}
+                aria-label="Close fullscreen"
               >
-                {/* Glow */}
-                <div
-                  className="absolute rounded-full blur-3xl opacity-20 pointer-events-none w-80 h-80"
-                  style={{ backgroundColor: accent }}
-                />
+                <X className="h-4 w-4" />
+              </button>
 
-                <div
-                  className="relative z-10 h-[65vh] min-h-[400px] max-h-[624px] aspect-[300/624] rounded-[2.5rem] sm:rounded-[3rem] border-2 border-zinc-700 bg-zinc-900 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] shrink-0"
-                  style={{ borderColor: `${accent}40` }}
+              {/* Prev */}
+              <button
+                className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:-translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
+                onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.max(0, (i ?? 0) - 1)); }}
+                disabled={fullscreenIndex === 0}
+                aria-label="Previous screen"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+
+              {/* Next */}
+              <button
+                className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white transition-all hover:translate-x-1 disabled:opacity-30 disabled:cursor-not-allowed z-10"
+                onClick={(e) => { e.stopPropagation(); setFullscreenIndex((i) => Math.min(items.length - 1, (i ?? 0) + 1)); }}
+                disabled={fullscreenIndex === items.length - 1}
+                aria-label="Next screen"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+
+              {/* Large phone */}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={fullscreenIndex}
+                  initial={{ opacity: 0, scale: 0.92, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } }}
+                  exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.15 } }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex flex-col items-center gap-5"
                 >
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-7 w-24 rounded-b-2xl bg-zinc-900 border-b-2 border-x-2 border-zinc-800 flex items-center justify-center gap-1.5">
-                    <div className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
-                    <div className="h-1 w-7 rounded-full bg-zinc-800" />
-                  </div>
-                  <Image 
-                    src={items[fullscreenIndex].path}
-                    alt={items[fullscreenIndex].label}
-                    fill
-                    className="object-cover"
-                    sizes="(max-height: 800px) 250px, 300px"
+                  {/* Glow */}
+                  <div
+                    className="absolute rounded-full blur-3xl opacity-20 pointer-events-none w-80 h-80"
+                    style={{ backgroundColor: accent }}
                   />
-                  <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 h-1 w-24 rounded-full bg-zinc-700" />
-                </div>
 
-                {/* Screen label + description */}
-                <div className="text-center max-w-xs">
-                  <p className="font-semibold text-zinc-100 mb-1">
-                    {items[fullscreenIndex].label}
-                  </p>
-                  {items[fullscreenIndex].description && (
-                    <p className="text-xs text-zinc-500 leading-relaxed">
-                      {items[fullscreenIndex].description}
-                    </p>
-                  )}
-                </div>
-
-                {/* Dot indicators */}
-                <div className="flex items-center gap-2">
-                  {items.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={(e) => { e.stopPropagation(); setFullscreenIndex(i); }}
-                      className="rounded-full transition-all duration-300"
-                      style={{
-                        width: i === fullscreenIndex ? "20px" : "6px",
-                        height: "6px",
-                        backgroundColor: i === fullscreenIndex ? accent : "#3f3f46",
-                      }}
-                      aria-label={`Go to screen ${i + 1}`}
+                  <div
+                    className="relative z-10 h-[85vh] min-h-[500px] max-h-[900px] aspect-[300/624] rounded-[2.5rem] sm:rounded-[3rem] border-2 border-zinc-700 bg-zinc-900 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] shrink-0"
+                    style={{ borderColor: `${accent}40` }}
+                  >
+                    {/* Notch */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-7 w-24 rounded-b-2xl bg-zinc-900 border-b-2 border-x-2 border-zinc-800 flex items-center justify-center gap-1.5">
+                      <div className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
+                      <div className="h-1 w-7 rounded-full bg-zinc-800" />
+                    </div>
+                    <Image 
+                      src={items[fullscreenIndex].path}
+                      alt={items[fullscreenIndex].label}
+                      fill
+                      className="object-cover"
+                      sizes="(max-height: 1000px) 400px, 500px"
                     />
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 h-1 w-24 rounded-full bg-zinc-700" />
+                  </div>
+
+                  {/* Screen label + description */}
+                  <div className="text-center max-w-xs">
+                    <p className="font-semibold text-zinc-100 mb-1">
+                      {items[fullscreenIndex].label}
+                    </p>
+                    {items[fullscreenIndex].description && (
+                      <p className="text-xs text-zinc-500 leading-relaxed">
+                        {items[fullscreenIndex].description}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Dot indicators */}
+                  <div className="flex items-center gap-2">
+                    {items.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={(e) => { e.stopPropagation(); setFullscreenIndex(i); }}
+                        className="rounded-full transition-all duration-300"
+                        style={{
+                          width: i === fullscreenIndex ? "20px" : "6px",
+                          height: "6px",
+                          backgroundColor: i === fullscreenIndex ? accent : "#3f3f46",
+                        }}
+                        aria-label={`Go to screen ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }

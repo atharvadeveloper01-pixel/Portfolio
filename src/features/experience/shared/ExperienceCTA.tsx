@@ -44,7 +44,7 @@ export default function ExperienceCTA({ github, demo, isPlayStore, accent, proje
             {/* CTA buttons */}
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
-                href={`mailto:${PERSONAL.email}`}
+                href="/#contact"
                 className="inline-flex h-11 items-center gap-2 rounded-full px-8 text-sm font-semibold text-white shadow-lg transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: accent }}
               >

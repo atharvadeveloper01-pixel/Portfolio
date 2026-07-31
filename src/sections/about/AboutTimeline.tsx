@@ -7,7 +7,7 @@ export default function AboutTimeline() {
       <div className="absolute left-[19px] top-2 bottom-2 w-px bg-zinc-800" aria-hidden="true" />
 
       {TIMELINE.map((item, index) => (
-        <div key={item.year} className="relative flex gap-5 pb-10 last:pb-0">
+        <div key={index} className="relative flex gap-5 pb-10 last:pb-0">
           {/* Dot */}
           <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-zinc-700 bg-zinc-950 mt-0.5">
             <div className="h-2 w-2 rounded-full bg-accent" />

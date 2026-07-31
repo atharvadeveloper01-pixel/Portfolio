@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { PROJECTS } from "@/constants/projects";
 
 const floatA = {
   animate: { y: [0, -12, 0] },
@@ -130,7 +131,7 @@ export default function HeroVisual() {
       >
         <div className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 shadow-xl backdrop-blur-md">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/15">
-            <span className="text-base font-bold text-accent">3</span>
+            <span className="text-base font-bold text-accent">{PROJECTS.length}</span>
           </div>
           <div>
             <p className="text-xs font-semibold text-zinc-100">Projects</p>

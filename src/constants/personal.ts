@@ -18,9 +18,11 @@ export const PERSONAL = {
   resumeUrl: "#", // Replace with actual resume URL when available
 } as const;
 
+import { PROJECTS } from "./projects";
+
 export const STATS: Stat[] = [
   { value: "1+", label: "Year Flutter" },
-  { value: "3", label: "Projects Built" },
+  { value: PROJECTS.length.toString(), label: "Projects Built" },
   { value: "1", label: "Play Store App" },
   { value: "5+", label: "Technologies" },
 ];
