@@ -79,6 +79,7 @@ export interface Project {
   slug: string;
   name: string;
   tagline: string;
+  description?: string;
 
   // Narrative
   problem: string;
