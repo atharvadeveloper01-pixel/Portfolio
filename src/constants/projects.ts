@@ -426,32 +426,53 @@ export const PROJECTS: Project[] = [
     images: {
       cover: "cover.webp",
       thumbnail: "thumbnail.webp",
-      hero: "hero.webp",
+      hero: "screens/home_screen.webp",
       screens: [
         {
-          title: "Main Menu",
-          description:
-            "The first screen every player sees. High score is prominently displayed to motivate replay. The Play button is large and immediate — zero friction to starting a game.",
-          image: "menu.webp",
+          title: "Home",
+          description: "Main dashboard and entry point.",
+          image: "home_screen.webp",
         },
         {
-          title: "Gameplay",
-          description:
-            "The core loop — a 3×3 grid of interactive tiles. GestureDetector handles all touch input. The render loop is carefully optimised to maintain 60fps even as difficulty scales.",
-          image: "game.webp",
+          title: "Player Journey",
+          description: "Track your progress and achievements.",
+          image: "journey_screen.webp",
         },
         {
-          title: "Result",
-          description:
-            "Post-game result screen. New high scores are celebrated with a confetti animation. Score improvement percentage gives players a sense of progression. One-tap replay keeps the loop tight.",
-          image: "result.webp",
+          title: "Level Selection",
+          description: "Choose your next challenge.",
+          image: "level_screen.webp",
         },
-      ],
-      gallery: [
-        "01.webp",
-        "02.webp",
-        "03.webp",
-        "04.webp",
+        {
+          title: "Game Board",
+          description: "The core grid layout.",
+          image: "game_screen.webp",
+        },
+        {
+          title: "Gameplay Action",
+          description: "Interactive 60fps puzzle mechanics.",
+          image: "gameplay_screen.webp",
+        },
+        {
+          title: "Daily Puzzle",
+          description: "Unique daily challenges.",
+          image: "daily_puzzle_screen.webp",
+        },
+        {
+          title: "Theme Store",
+          description: "Unlock new visual themes and styles.",
+          image: "theme_store_screen.webp",
+        },
+        {
+          title: "Level Cleared",
+          description: "Victory screen and score summary.",
+          image: "level_cleared_screen.webp",
+        },
+        {
+          title: "Player Profile",
+          description: "Player statistics and settings.",
+          image: "profile_screen.webp",
+        },
       ],
     },
 
