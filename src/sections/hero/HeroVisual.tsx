@@ -119,10 +119,11 @@ export default function HeroVisual() {
             <div key={tech} className="flex items-center gap-2">
               <div className="h-1.5 w-1.5 rounded-full bg-accent" />
               <span className="text-xs font-medium text-zinc-300">{tech}</span>
-            </div>
+            </div> 
           ))}
         </div>
       </motion.div>
+      
 
       {/* ── Floating card: Projects count ─── */}
       <motion.div
